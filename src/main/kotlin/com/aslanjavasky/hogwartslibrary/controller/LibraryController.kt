@@ -7,12 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping
  * @author Aslan Javasky, Java/Kotlin developer, Telegram messanger:@Aslan_Javasky
  */
 @Controller
-class WelcomeController {
+class LibraryController {
 
     //GET, PUT, POST, DELETE, PATCH
-    @GetMapping("/welcome")
-    fun welcome(): String {
-        return "hello"
-    }
+    @GetMapping("lib/welcome")
+    fun welcome()= "hello"
+
+
+    @GetMapping("lib/regular")
+    fun regular()="regular_section"
+
+
+    @GetMapping("lib/secret")
+    fun secter()="secret_section"
+
 
 }
