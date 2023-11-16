@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title> Hogwarts Lib</title>
 </head>
 
 <body>
+<p> Hi, <span th:text="${name}"/> <span th:text="${lastname}"/> !</p>
 <p> Welcome to Hogwars Library! </p>
 <a href="/lib/regular">Go to the regular section!</a>
 </body>
