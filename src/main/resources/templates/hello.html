@@ -5,7 +5,7 @@
 </head>
 
 <body>
-<p> Hi, <span th:text="${name}"/> <span th:text="${lastname}"/> !</p>
+<p th:style=" 'color:'+ ${text_color} "> Hi, <span th:text="${name}"/> <span th:text="${lastname}"/> !</p>
 <p> Welcome to Hogwars Library! </p>
 <a href="/lib/regular">Go to the regular section!</a>
 </body>

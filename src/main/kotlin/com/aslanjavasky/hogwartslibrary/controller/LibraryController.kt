@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
@@ -17,15 +18,17 @@ import java.util.logging.Logger
 class LibraryController {
 
     //GET, PUT, POST, DELETE, PATCH
-    @GetMapping("/welcome")
+    @GetMapping("/welcome/{color}")
 //    @RequestMapping(method = [RequestMethod.GET], value = ["lib/welcome"])
     fun welcome(
         @RequestParam(value = "name", required = false) name: String?,
         @RequestParam(value = "lastname", required = false) lastname: String?,
+        @PathVariable("color") textColor:String,
         model:Model
     ): String {
         model.addAttribute("name",name)
         model.addAttribute("lastname",lastname)
+        model.addAttribute("text_color",textColor)
         return "hello"
     }
 
