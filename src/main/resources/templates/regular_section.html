@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title> Hogwarts Lib</title>
 </head>
@@ -7,5 +7,16 @@
 <body>
 <p> Welcome to Regular section! </p>
 <a href="/lib/secret">Go to the secret section</a>
+<p></p>
+<table>
+    <tr>
+        <th>AUTHOR</th>
+        <th>BOOK NAME</th>
+    </tr>
+    <tr th:each=" book : ${books} ">
+        <td th:text="${book.author}"/>
+        <td th:text="${book.name}"/>
+    </tr>
+</table>
 </body>
 </html>

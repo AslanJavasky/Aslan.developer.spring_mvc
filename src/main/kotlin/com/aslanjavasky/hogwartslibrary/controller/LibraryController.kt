@@ -1,6 +1,9 @@
 package com.aslanjavasky.hogwartslibrary.controller
 
+import com.aslanjavasky.hogwartslibrary.repository.BookRepository
+import com.aslanjavasky.hogwartslibrary.repository.BookRepositoryImpl
 import jakarta.servlet.http.HttpServletRequest
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,7 +18,9 @@ import java.util.logging.Logger
  */
 @Controller
 @RequestMapping("lib")
-class LibraryController {
+class LibraryController(
+    @Autowired val repo: BookRepository
+) {
 
     //GET, PUT, POST, DELETE, PATCH
     @GetMapping("/welcome/{color}")
@@ -23,12 +28,14 @@ class LibraryController {
     fun welcome(
         @RequestParam(value = "name", required = false) name: String?,
         @RequestParam(value = "lastname", required = false) lastname: String?,
-        @PathVariable("color") textColor:String,
-        model:Model
+        @PathVariable("color") textColor: String,
+        model: Model
     ): String {
-        model.addAttribute("name",name)
-        model.addAttribute("lastname",lastname)
-        model.addAttribute("text_color",textColor)
+        if (!name.isNullOrBlank() && !lastname.isNullOrBlank()) {
+            model.addAttribute("name", name)
+            model.addAttribute("lastname", lastname)
+        }
+        model.addAttribute("text_color", textColor)
         return "hello"
     }
 
@@ -43,13 +50,8 @@ class LibraryController {
 
     //2)Example with @RequestParam
     @GetMapping("/regular") //lib/regular
-    fun regular(
-        @RequestParam(value = "bookname", required = false) name: String?,
-        @RequestParam(value = "author", required = false) author: String?,
-    ): String {
-        if (!name.isNullOrBlank() && !author.isNullOrBlank()) {
-            Logger.getLogger(LibraryController::class.java.name).info("The author:$author and name of Book is $name")
-        }
+    fun regular(model: Model): String {
+        model.addAttribute("books", repo.getAllBooks())
         return "regular_section"
     }
 
