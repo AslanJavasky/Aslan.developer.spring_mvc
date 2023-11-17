@@ -1,5 +1,6 @@
 package com.aslanjavasky.hogwartslibrary.controller
 
+import com.aslanjavasky.hogwartslibrary.model.Book
 import com.aslanjavasky.hogwartslibrary.repository.BookRepository
 import com.aslanjavasky.hogwartslibrary.repository.BookRepositoryImpl
 import jakarta.servlet.http.HttpServletRequest
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
@@ -51,6 +53,18 @@ class LibraryController(
     //2)Example with @RequestParam
     @GetMapping("/regular") //lib/regular
     fun regular(model: Model): String {
+        model.addAttribute("books", repo.getAllBooks())
+        return "regular_section"
+    }
+
+    @PostMapping("/regular") //lib/regular
+    fun createNewBook(
+        @RequestParam name: String,
+        @RequestParam author: String,
+        model: Model
+    ): String {
+        val newBook= Book(name, author)
+        repo.saveBook(newBook)
         model.addAttribute("books", repo.getAllBooks())
         return "regular_section"
     }
