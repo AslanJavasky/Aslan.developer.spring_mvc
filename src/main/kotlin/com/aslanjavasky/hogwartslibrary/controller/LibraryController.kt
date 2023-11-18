@@ -56,32 +56,30 @@ class LibraryController(
     @GetMapping("/regular") //lib/regular
     fun regular(model: Model): String {
         model.addAttribute("books", repo.getAllBooks())
+        model.addAttribute("book",Book())
 //        model.addAttribute("h1_text", "HOGWARTS LIBRARY")
         return "regular_section"
     }
 
     @PostMapping("/regular") //lib/regular
     fun createNewBook(
-        @RequestParam name: String,
-        @RequestParam author: String,
+        @ModelAttribute("book") book: Book,
         model: Model
     ): String {
-        val newBook= Book(name, author)
-        repo.saveBook(newBook)
+        repo.saveBook(book)
         model.addAttribute("books", repo.getAllBooks())
         return "regular_section"
     }
 
 
     @GetMapping("/secret") //lib/secret
-    fun secret(model:Model): String {
+    fun secret(model: Model): String {
 //        model.addAttribute("h1_text", "HOGWARTS LIBRARY")
         return "secret_section"
     }
 
     @ModelAttribute("h1_text")
-    fun addTextForHead1()="HOGWARTS LIBRARY"
-
+    fun addTextForHead1() = "HOGWARTS LIBRARY"
 
 
 }

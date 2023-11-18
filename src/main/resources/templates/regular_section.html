@@ -10,12 +10,14 @@
 <a href="/lib/secret">Go to the secret section</a>
 <br/>
 <br/>
-<form method="POST" action="/lib/regular">
-    <label for="name">Book name: </label>
-    <input type="text" name="name" id="name"> <br/>
-    <label for="author">Book author: </label>
-    <input type="text" name="author"id="author"><br/>
-    <button type="submit">Create a new book</button>
+<form th:method="POST" th:action="@{/lib/regular}" th:object="${book}">
+    <div>
+        <label for="name">Book name: </label>
+        <input type="text" name="name" id="name" th:field="*{name}"> <br/>
+        <label for="author">Book author: </label>
+        <input type="text" name="author" id="author" th:field="*{author}"><br/>
+        <button type="submit">Create a new book</button>
+    </div>
 </form>
 <br/>
 <table>
