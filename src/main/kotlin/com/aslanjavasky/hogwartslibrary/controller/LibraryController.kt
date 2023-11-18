@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -36,6 +37,7 @@ class LibraryController(
         if (!name.isNullOrBlank() && !lastname.isNullOrBlank()) {
             model.addAttribute("name", name)
             model.addAttribute("lastname", lastname)
+//            model.addAttribute("h1_text", "HOGWARTS LIBRARY")
         }
         model.addAttribute("text_color", textColor)
         return "hello"
@@ -54,6 +56,7 @@ class LibraryController(
     @GetMapping("/regular") //lib/regular
     fun regular(model: Model): String {
         model.addAttribute("books", repo.getAllBooks())
+//        model.addAttribute("h1_text", "HOGWARTS LIBRARY")
         return "regular_section"
     }
 
@@ -71,7 +74,14 @@ class LibraryController(
 
 
     @GetMapping("/secret") //lib/secret
-    fun secret() = "secret_section"
+    fun secret(model:Model): String {
+//        model.addAttribute("h1_text", "HOGWARTS LIBRARY")
+        return "secret_section"
+    }
+
+    @ModelAttribute("h1_text")
+    fun addTextForHead1()="HOGWARTS LIBRARY"
+
 
 
 }
