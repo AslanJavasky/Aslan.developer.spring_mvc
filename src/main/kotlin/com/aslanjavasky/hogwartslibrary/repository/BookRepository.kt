@@ -9,5 +9,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BookRepository {
     fun getAllBooks(): MutableList<Book>
+    fun getBookById(id:Long): Book
     fun saveBook(book:Book)
+    fun updateBookById(id: Long, book: Book)
 }

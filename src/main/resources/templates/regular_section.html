@@ -24,10 +24,14 @@
     <tr>
         <th>AUTHOR</th>
         <th>BOOK NAME</th>
+        <th>EDIT</th>
     </tr>
     <tr th:each=" book : ${books} ">
         <td th:text="${book.author}"/>
         <td th:text="${book.name}"/>
+        <td>
+            <a th:href="@{/lib/edit/{id}(id=${book.id})}">Edit</a>
+        </td>
     </tr>
 </table>
 </body>

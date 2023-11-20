@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -25,7 +26,8 @@ class LibraryController(
     @Autowired val repo: BookRepository
 ) {
 
-    //GET, PUT, POST, DELETE, PATCH
+    //Http Methods:GET, PUT, POST, DELETE, PATCH
+    //Html5:GET POST
     @GetMapping("/welcome/{color}")
 //    @RequestMapping(method = [RequestMethod.GET], value = ["lib/welcome"])
     fun welcome(
@@ -56,7 +58,7 @@ class LibraryController(
     @GetMapping("/regular") //lib/regular
     fun regular(model: Model): String {
         model.addAttribute("books", repo.getAllBooks())
-        model.addAttribute("book",Book())
+        model.addAttribute("book", Book())
 //        model.addAttribute("h1_text", "HOGWARTS LIBRARY")
         return "regular_section"
     }
@@ -77,6 +79,25 @@ class LibraryController(
 //        model.addAttribute("h1_text", "HOGWARTS LIBRARY")
         return "secret_section"
     }
+
+    @GetMapping("/edit/{id}")
+    fun edit(
+        @PathVariable("id") id: Long,
+        model: Model
+    ): String {
+        model.addAttribute("book_for_edit", repo.getBookById(id))
+        return "edit_book"
+    }
+
+    @PostMapping("/edit/{id}")
+    fun update(
+        @PathVariable("id") id: Long,
+        @ModelAttribute("book_for_edit") book: Book
+    ): String {
+        repo.updateBookById(id, book)
+        return "redirect:/lib/regular"
+    }
+
 
     @ModelAttribute("h1_text")
     fun addTextForHead1() = "HOGWARTS LIBRARY"

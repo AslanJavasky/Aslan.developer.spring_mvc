@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/lib/edit/{id}(id=${book_for_edit.id})}" th:object="${book_for_edit}">
+    <div>
+        <label for="name">Book name: </label>
+        <input type="text" name="name" id="name" th:field="*{name}"> <br/>
+        <label for="author">Book author: </label>
+        <input type="text" name="author" id="author" th:field="*{author}"><br/>
+        <button type="submit">Edit!</button>
+    </div>
+</form>
+</body>
+</html>
