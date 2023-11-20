@@ -12,4 +12,5 @@ interface BookRepository {
     fun getBookById(id:Long): Book
     fun saveBook(book:Book)
     fun updateBookById(id: Long, book: Book)
+    fun deleteBookById(id:Long)
 }

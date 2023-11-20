@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PatchMapping
@@ -95,6 +96,14 @@ class LibraryController(
         @ModelAttribute("book_for_edit") book: Book
     ): String {
         repo.updateBookById(id, book)
+        return "redirect:/lib/regular"
+    }
+
+    @PostMapping("/delete/{id}")
+    fun delete(
+        @PathVariable("id") id: Long,
+    ): String {
+        repo.deleteBookById(id)
         return "redirect:/lib/regular"
     }
 
