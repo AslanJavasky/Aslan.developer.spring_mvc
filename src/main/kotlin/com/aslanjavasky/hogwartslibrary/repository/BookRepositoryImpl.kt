@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository
 class BookRepositoryImpl : BookRepository {
 
     //C(create)R(read)U(update)D(delete)
-
     private val books = mutableListOf(
         Book(name="History of Magic", author="Bathilda Bagshot"),
         Book(name="Fantastic Beasts: Where to Find It", author="Newt Scamander"),

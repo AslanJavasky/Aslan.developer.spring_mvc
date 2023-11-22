@@ -4,9 +4,11 @@ import com.aslanjavasky.hogwartslibrary.model.Book
 import com.aslanjavasky.hogwartslibrary.repository.BookRepository
 import com.aslanjavasky.hogwartslibrary.repository.BookRepositoryImpl
 import jakarta.servlet.http.HttpServletRequest
+import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import java.util.logging.Logger
+
 
 /**
  * @author Aslan Javasky, Java/Kotlin developer, Telegram messanger:@Aslan_Javasky
@@ -66,9 +69,14 @@ class LibraryController(
 
     @PostMapping("/regular") //lib/regular
     fun createNewBook(
-        @ModelAttribute("book") book: Book,
+        @ModelAttribute("book") @Valid book: Book,
+        bindingResult: BindingResult,
         model: Model
     ): String {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("books", repo.getAllBooks())
+            return "regular_section"
+        }
         repo.saveBook(book)
         model.addAttribute("books", repo.getAllBooks())
         return "regular_section"

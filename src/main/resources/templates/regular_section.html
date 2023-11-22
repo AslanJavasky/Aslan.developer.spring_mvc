@@ -14,9 +14,18 @@
 <form th:method="POST" th:action="@{/lib/regular}" th:object="${book}">
     <div>
         <label for="name">Book name: </label>
-        <input type="text" name="name" id="name" th:field="*{name}"> <br/>
+        <input type="text" name="name" id="name" th:field="*{name}">
+        <span style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span>
+        <br/>
         <label for="author">Book author: </label>
-        <input type="text" name="author" id="author" th:field="*{author}"><br/>
+        <input type="text" name="author" id="author" th:field="*{author}">
+        <span  style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author error</span>
+        <br/>
+        <label for="year">Year of publication: </label>
+        <input type="text" name="yearOfPublication" id="year" th:field="*{yearOfPublication}" min="2015" max="2024">
+        <span  style="color:red" th:if="${#fields.hasErrors('yearOfPublication')}" th:errors="*{yearOfPublication}">Year error</span>
+        <br/>
+
         <button type="submit">Create a new book</button>
     </div>
 </form>
@@ -26,17 +35,19 @@
     <tr>
         <th>AUTHOR</th>
         <th>BOOK NAME</th>
+        <th>YEAR OF PUBLICATION</th>
         <th>EDIT</th>
         <th>DELETE</th>
     </tr>
     <tr th:each=" book : ${books} ">
         <td th:text="${book.author}"/>
         <td th:text="${book.name}"/>
+        <td th:text="${book.yearOfPublication}"/>
         <td>
             <a th:href="@{/lib/edit/{id}(id=${book.id})}">Edit</a>
         </td>
         <td>
-            <form  th:method="POST" th:action="@{/lib/delete/{id}(id=${book.id})}">
+            <form th:method="POST" th:action="@{/lib/delete/{id}(id=${book.id})}">
                 <button type="submit">Delete</button>
             </form>
         </td>
