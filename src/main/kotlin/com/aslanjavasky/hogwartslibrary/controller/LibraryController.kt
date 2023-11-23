@@ -101,8 +101,12 @@ class LibraryController(
     @PostMapping("/edit/{id}")
     fun update(
         @PathVariable("id") id: Long,
-        @ModelAttribute("book_for_edit") book: Book
+        @ModelAttribute("book_for_edit") @Valid  book: Book,
+        bindingResult: BindingResult
     ): String {
+        if (bindingResult.hasErrors()){
+            return "edit_book"
+        }
         repo.updateBookById(id, book)
         return "redirect:/lib/regular"
     }
