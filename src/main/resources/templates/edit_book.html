@@ -8,11 +8,17 @@
 <form th:method="POST" th:action="@{/lib/edit/{id}(id=${book_for_edit.id})}" th:object="${book_for_edit}">
     <div>
         <label for="name">Book name: </label>
-        <input type="text" name="name" id="name" th:field="*{name}"> <br/>
+        <input type="text" name="name" id="name" th:field="*{name}">
+        <span style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span>
+        <br/>
         <label for="author">Book author: </label>
-        <input type="text" name="author" id="author" th:field="*{author}"><br/>
+        <input type="text" name="author" id="author" th:field="*{author}">
+        <span  style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author error</span>
+        <br/>
         <label for="year">Year of publication: </label>
-        <input type="text" name="year" id="year" th:field="*{yearOfPublication}"><br/>
+        <input type="text" name="yearOfPublication" id="year" th:field="*{yearOfPublication}">
+        <span  style="color:red" th:if="${#fields.hasErrors('yearOfPublication')}" th:errors="*{yearOfPublication}">Year error</span>
+        <br/>
 
         <button type="submit">Edit!</button>
     </div>
