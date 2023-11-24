@@ -10,6 +10,7 @@ import jakarta.validation.constraints.*
 /**
  * @author Aslan Javasky, Java/Kotlin developer, Telegram messanger:@Aslan_Javasky
  */
+
 data class Book(
     var id: Long = 0,
     @field:NotEmpty(message = "The book name must be not empty")
@@ -23,11 +24,11 @@ data class Book(
     var yearOfPublication: Int = 2012
 
 ) {
-    companion object{
-        private var currentId:Long=0
-    }
-
-    init {
-        id=currentId++
-    }
+//    companion object{
+//        private var currentId:Long=0
+//    }
+//
+//    init {
+//        id=currentId++
+//    }
 }

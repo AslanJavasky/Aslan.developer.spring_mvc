@@ -6,6 +6,7 @@ import com.aslanjavasky.hogwartslibrary.repository.BookRepositoryImpl
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
@@ -27,7 +28,7 @@ import java.util.logging.Logger
 @Controller
 @RequestMapping("lib")
 class LibraryController(
-    @Autowired val repo: BookRepository
+    @Autowired @Qualifier("RepoH2") val repo: BookRepository
 ) {
 
     //Http Methods:GET, PUT, POST, DELETE, PATCH
@@ -62,7 +63,7 @@ class LibraryController(
     @GetMapping("/regular") //lib/regular
     fun regular(model: Model): String {
         model.addAttribute("books", repo.getAllBooks())
-        model.addAttribute("book", Book())
+        model.addAttribute("book", Book(name = "", author = "", yearOfPublication = 2020))
 //        model.addAttribute("h1_text", "HOGWARTS LIBRARY")
         return "regular_section"
     }

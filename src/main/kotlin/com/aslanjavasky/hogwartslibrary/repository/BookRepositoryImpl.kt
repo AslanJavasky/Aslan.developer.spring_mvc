@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository
 /**
  * @author Aslan Javasky, Java/Kotlin developer, Telegram messanger:@Aslan_Javasky
  */
-@Repository
+@Repository("RepoMutableList")
 class BookRepositoryImpl : BookRepository {
 
     //C(create)R(read)U(update)D(delete)
@@ -38,5 +38,6 @@ class BookRepositoryImpl : BookRepository {
     override fun deleteBookById(id: Long) {
         books.removeIf { it.id == id }
     }
+
 }
 
