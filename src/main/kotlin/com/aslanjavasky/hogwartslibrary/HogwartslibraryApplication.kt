@@ -10,5 +10,3 @@ class HogwartslibraryApplication
 fun main(args: Array<String>) {
 	runApplication<HogwartslibraryApplication>(*args)
 }
-
-//M(Model)V(View)C(Controller)
