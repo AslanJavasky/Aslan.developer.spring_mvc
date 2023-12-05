@@ -1,13 +1,13 @@
 package com.aslanjavasky.hogwartslibrary.repository
 
 import com.aslanjavasky.hogwartslibrary.model.Book
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Service
 
 /**
  * @author Aslan Javasky, Java/Kotlin developer, Telegram messanger:@Aslan_Javasky
  */
-@Repository
-interface BookRepository {
+@Service
+interface BookDbService {
     fun getAllBooks(): MutableList<Book>
     fun getBookById(id:Long): Book
     fun saveBook(book:Book)

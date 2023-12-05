@@ -1,15 +1,16 @@
 package com.aslanjavasky.hogwartslibrary.repository
 
 import com.aslanjavasky.hogwartslibrary.model.*
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
 /**
  * @author Aslan Javasky, Java/Kotlin developer, Telegram messanger:@Aslan_Javasky
  */
-@Repository("RepoH2")
-class BookRepositoryImplForH2(
-    private val jpaRepo:BookRepositoryJpa
-) : BookRepository{
+@Repository("RepoDB")
+class BookDbServiceImplForDB(
+    @Autowired private val jpaRepo: BookRepositoryJpa
+) : BookDbService {
     override fun getAllBooks(): MutableList<Book> {
         return jpaRepo.findAll().fromEntityList()
     }
@@ -23,11 +24,11 @@ class BookRepositoryImplForH2(
     }
 
     override fun updateBookById(id: Long, book: Book) {
-        if (jpaRepo.existsById(id)){
-            val existingBook=jpaRepo.findById(id).get().apply {
-                name=book.name
-                author=book.author
-                yearOfPublication=book.yearOfPublication
+        if (jpaRepo.existsById(id)) {
+            val existingBook = jpaRepo.findById(id).get().apply {
+                name = book.name
+                author = book.author
+                yearOfPublication = book.yearOfPublication
             }
             jpaRepo.save(existingBook)
         }
@@ -37,4 +38,4 @@ class BookRepositoryImplForH2(
         jpaRepo.deleteById(id)
     }
 
- }
+}

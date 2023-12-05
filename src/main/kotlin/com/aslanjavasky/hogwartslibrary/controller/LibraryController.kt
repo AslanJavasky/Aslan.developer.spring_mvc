@@ -1,25 +1,19 @@
 package com.aslanjavasky.hogwartslibrary.controller
 
 import com.aslanjavasky.hogwartslibrary.model.Book
-import com.aslanjavasky.hogwartslibrary.repository.BookRepository
-import com.aslanjavasky.hogwartslibrary.repository.BookRepositoryImpl
-import jakarta.servlet.http.HttpServletRequest
+import com.aslanjavasky.hogwartslibrary.repository.BookDbService
 import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
-import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
-import java.util.logging.Logger
 
 
 /**
@@ -28,7 +22,7 @@ import java.util.logging.Logger
 @Controller
 @RequestMapping("lib")
 class LibraryController(
-    @Autowired @Qualifier("RepoH2") val repo: BookRepository
+    @Autowired @Qualifier("RepoDB") val bookDbService: BookDbService
 ) {
 
     //Http Methods:GET, PUT, POST, DELETE, PATCH
@@ -62,7 +56,7 @@ class LibraryController(
     //2)Example with @RequestParam
     @GetMapping("/regular") //lib/regular
     fun regular(model: Model): String {
-        model.addAttribute("books", repo.getAllBooks())
+        model.addAttribute("books", bookDbService.getAllBooks())
         model.addAttribute("book", Book(name = "", author = "", yearOfPublication = 2020))
 //        model.addAttribute("h1_text", "HOGWARTS LIBRARY")
         return "regular_section"
@@ -75,11 +69,11 @@ class LibraryController(
         model: Model
     ): String {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("books", repo.getAllBooks())
+            model.addAttribute("books", bookDbService.getAllBooks())
             return "regular_section"
         }
-        repo.saveBook(book)
-        model.addAttribute("books", repo.getAllBooks())
+        bookDbService.saveBook(book)
+        model.addAttribute("books", bookDbService.getAllBooks())
         return "regular_section"
     }
 
@@ -95,7 +89,7 @@ class LibraryController(
         @PathVariable("id") id: Long,
         model: Model
     ): String {
-        model.addAttribute("book_for_edit", repo.getBookById(id))
+        model.addAttribute("book_for_edit", bookDbService.getBookById(id))
         return "edit_book"
     }
 
@@ -108,7 +102,7 @@ class LibraryController(
         if (bindingResult.hasErrors()){
             return "edit_book"
         }
-        repo.updateBookById(id, book)
+        bookDbService.updateBookById(id, book)
         return "redirect:/lib/regular"
     }
 
@@ -116,7 +110,7 @@ class LibraryController(
     fun delete(
         @PathVariable("id") id: Long,
     ): String {
-        repo.deleteBookById(id)
+        bookDbService.deleteBookById(id)
         return "redirect:/lib/regular"
     }
 

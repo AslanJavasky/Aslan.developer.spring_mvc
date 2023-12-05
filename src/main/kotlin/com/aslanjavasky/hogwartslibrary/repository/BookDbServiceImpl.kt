@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository
  * @author Aslan Javasky, Java/Kotlin developer, Telegram messanger:@Aslan_Javasky
  */
 @Repository("RepoMutableList")
-class BookRepositoryImpl : BookRepository {
+class BookDbServiceImpl : BookDbService {
 
     //C(create)R(read)U(update)D(delete)
     private val books = mutableListOf(
