@@ -1,10 +1,6 @@
 package com.aslanjavasky.hogwartslibrary.model
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import jakarta.validation.constraints.*
 
 /**
@@ -17,13 +13,17 @@ data class BookEntity(
     var id: Long = 0,
     @field:NotEmpty(message = "The book name must be not empty")
     @field:Size(min = 2, max = 40, message = "the number of characters must be from 2 to 40")
+    @Column(name="name_of_book")
     var name: String = "",
     @field:NotEmpty(message = "The book author must be not empty")
     var author: String = "",
     @field:Digits(integer = 4, fraction = 0, message = "Invalid year format")
     @field:Min(value = 2015, message = "Only modern books!!")
     @field:Max(value = 2024, message = "The book has not yet been published")
-    var yearOfPublication: Int = 2012
+    var yearOfPublication: Int = 2012,
+//    @Enumerated(EnumType.STRING)
+//    val genre: Genre=Genre.FICTION
+
 )
 
 fun BookEntity.fromEntity(): Book {
