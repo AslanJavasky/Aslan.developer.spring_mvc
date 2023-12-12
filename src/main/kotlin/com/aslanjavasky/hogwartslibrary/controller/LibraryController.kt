@@ -1,7 +1,7 @@
 package com.aslanjavasky.hogwartslibrary.controller
 
 import com.aslanjavasky.hogwartslibrary.model.Book
-import com.aslanjavasky.hogwartslibrary.repository.BookDbService
+import com.aslanjavasky.hogwartslibrary.service.BookDbService
 import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier

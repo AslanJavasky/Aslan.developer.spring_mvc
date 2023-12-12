@@ -1,6 +1,7 @@
-package com.aslanjavasky.hogwartslibrary.repository
+package com.aslanjavasky.hogwartslibrary.service
 
 import com.aslanjavasky.hogwartslibrary.model.*
+import com.aslanjavasky.hogwartslibrary.repository.BookRepositoryJpa
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 

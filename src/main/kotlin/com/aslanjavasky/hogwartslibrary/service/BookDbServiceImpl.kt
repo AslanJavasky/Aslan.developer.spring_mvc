@@ -1,4 +1,4 @@
-package com.aslanjavasky.hogwartslibrary.repository
+package com.aslanjavasky.hogwartslibrary.service
 
 import com.aslanjavasky.hogwartslibrary.model.Book
 import org.springframework.stereotype.Repository
