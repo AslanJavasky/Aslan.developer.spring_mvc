@@ -2,12 +2,14 @@ package com.aslanjavasky.hogwartslibrary.model
 
 import jakarta.persistence.*
 import jakarta.validation.constraints.*
+import org.springframework.data.rest.core.annotation.RestResource
 
 /**
  * @author Aslan Javasky, Java/Kotlin developer, Telegram messanger:@Aslan_Javasky
  */
 @Entity
 @Table(name = "books")
+@RestResource(path="books", rel="books")
 data class BookEntity(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
